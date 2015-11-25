@@ -1,8 +1,23 @@
 <?php
 //config.php
 
-//database credentials stored here
-include 'credentials.php'; 
+define('DEBUG',TRUE); #we want to see all errors
+
+date_default_timezone_set('America/Los_Angeles'); #sets default date/timezone for this website
+
+include 'credentials.php'; //stores database login info
+include 'common.php'; //stores all unsightly application functions, etc.
+include 'MyAutoLoader.php'; //loads class that autoloads all classes in include folder
+
+/* use the following path settings for placing all code in one application folder */ 
+define('VIRTUAL_PATH', 'http://smcdavid.com/itc240/retro/'); # Virtual (web) 'root' of application for images, JS & CSS files
+
+define('PHYSICAL_PATH', '/home/shumcd/smcdavid.com/itc240/retro/'); # Physical (PHP) 'root' of application for file & upload reference
+
+define('INCLUDE_PATH', PHYSICAL_PATH . 'includes/'); # Path to PHP include files - INSIDE APPLICATION ROOT
+
+ob_start();  #buffers our page to be prevent header errors. Call before INC files or ANY html!
+header("Cache-Control: no-cache");header("Expires: -1");#Helps stop browser & proxy caching
 
 
 //echo basename($_SERVER['PHP_SELF']);
@@ -192,3 +207,4 @@ function process_post()
     }
     return $myReturn;
 }
+
